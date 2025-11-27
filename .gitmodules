@@ -1,0 +1,6 @@
+[submodule "Rang-Audio-Visual"]
+	path = Rang-Audio-Visual
+	url = https://github.com/ArafKabir/Rang-Audio-Visual.git
+[submodule "rang-audio-visual-backend"]
+	path = rang-audio-visual-backend
+	url = https://github.com/ArafKabir/rang-audio-visual-backend.git
