@@ -1,0 +1,51 @@
+
+services:
+  # === Backend (Spring Boot) ===
+  backend:
+    build: ./rang-audio-visual-backend
+    container_name: rangav-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/rangAVdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Kazi.2413!
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    depends_on:
+      - db
+    networks:
+      - rang-network
+
+  # === Frontend (React Router SSR) ===
+  frontend:
+    build: ./Rang-Audio-Visual
+    container_name: rangav-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - rang-network
+
+
+  # === MySQL Database ===
+  db:
+    image: mysql:8.0
+    container_name: rangav-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Kazi.2413!
+      MYSQL_DATABASE: rangAVdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - rang-network
+
+networks:
+  rang-network:
+
+volumes:
+  mysql_data:
